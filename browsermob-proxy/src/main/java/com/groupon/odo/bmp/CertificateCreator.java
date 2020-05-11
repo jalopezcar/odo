@@ -228,6 +228,7 @@ import org.bouncycastle.asn1.DEREncodableVector;
 import org.bouncycastle.asn1.DERObjectIdentifier;
 import org.bouncycastle.asn1.DERSequence;
 import org.bouncycastle.asn1.x509.BasicConstraints;
+import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.jce.X509Principal;
@@ -611,6 +612,12 @@ public class CertificateCreator {
 		v3CertGen.setSignatureAlgorithm(CertificateCreator.SIGN_ALGO);
 
 		// Add typical extensions for signing cert
+
+		v3CertGen.addExtension(
+				X509Extensions.SubjectAlternativeName,
+				false,
+				new GeneralName(GeneralName.dNSName, "CyberVillains.com"));
+
 		v3CertGen.addExtension(
 				X509Extensions.SubjectKeyIdentifier,
 				false,
